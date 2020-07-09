@@ -2,8 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const massive = require('massive');
-const session = require('express-session');
+const session = require('express-session')
 const AC = require('./controllers/authController');
+const AC2 = require('./controllers/authController2');
 
 const { SERVER_PORT, DB_STRING, SESSION_SECRET } = process.env;
 
@@ -17,6 +18,7 @@ massive({
     app.set('db', db);
 });
 
+
 app.use(session({
     secret: SESSION_SECRET,
     resave: false,
@@ -26,8 +28,9 @@ app.use(session({
     }
 }));
 
+
 // auth endpoints
-app.post('/auth/register', AC.registerUser);
+app.post('/auth/register', AC2.registerUser);
 app.post('/auth/login', AC.loginUser);
 app.post('/auth/logout', AC.logoutUser);
 
